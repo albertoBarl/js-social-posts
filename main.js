@@ -61,6 +61,7 @@ const posts = [
   },
 ];
 
+// MILESTONE 1, .container content
 let content = "";
 posts.forEach((elements) => {
   content += `<div class="post">
@@ -88,7 +89,7 @@ posts.forEach((elements) => {
     <div class="post__footer">
       <div class="likes js-likes">
         <div class="likes__cta">
-          <a class="like-button js-like-button" href="#" data-postid="1">
+          <a class="like-button js-like-button" href="#" data-postid="${elements.id}">
             <i
               class="like-button__icon fas fa-thumbs-up"
               aria-hidden="true"
@@ -98,7 +99,7 @@ posts.forEach((elements) => {
         </div>
         <div class="likes__counter">
           Piace a
-          <b id="like-counter-1" class="js-likes-counter">${elements.likes}</b> persone
+          <b id="like-counter-${elements.id}" class="js-likes-counter">${elements.likes}</b> persone
         </div>
       </div>
     </div>
