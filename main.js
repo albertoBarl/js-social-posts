@@ -61,7 +61,7 @@ const posts = [
   },
 ];
 
-// MILESTONE 1, .container content
+// MILESTONE 1; MILESTONE 2 .container content
 let content = "";
 posts.forEach((elements) => {
   content += `<div class="post">
