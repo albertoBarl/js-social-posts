@@ -61,6 +61,8 @@ const posts = [
   },
 ];
 
+const userLikes = [];
+
 // MILESTONE 1; MILESTONE 2 .container content
 let content = "";
 posts.forEach((elements) => {
@@ -89,7 +91,9 @@ posts.forEach((elements) => {
     <div class="post__footer">
       <div class="likes js-likes">
         <div class="likes__cta">
-          <a class="like-button js-like-button" href="#" data-postid="${elements.id}">
+          <a class="like-button ${
+            isLiked(elements.id) ? "like-button--liked" : ""
+          } js-like-button" href="#">
             <i
               class="like-button__icon fas fa-thumbs-up"
               aria-hidden="true"
@@ -99,7 +103,9 @@ posts.forEach((elements) => {
         </div>
         <div class="likes__counter">
           Piace a
-          <b id="like-counter-${elements.id}" class="js-likes-counter">${elements.likes}</b> persone
+          <b id="like-counter-${elements.id}" class="js-likes-counter">${
+    elements.likes
+  }</b> persone
         </div>
       </div>
     </div>
@@ -108,3 +114,26 @@ posts.forEach((elements) => {
 
 let container = document.getElementById("container");
 container.innerHTML += content;
+
+function isLiked(idPost) {
+  return userLikes.includes(idPost);
+}
+
+const likeBtns = document.querySelectorAll(".js-like-button");
+const likeCounters = document.querySelectorAll(".js-likes-counter");
+
+for (let i = 0; i < likeBtns.length; i++) {
+  const element = likeBtns[i];
+  element.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (!element.classList.contains("like-button--liked")) {
+      element.classList.add("like-button--liked");
+      const thisCounter = likeCounters[i];
+      const number = parseInt(thisCounter.innerHTML);
+      thisCounter.innerHTML = number + 1;
+
+      const likedPost = posts[i];
+      likedPost.likes++;
+    }
+  });
+}
